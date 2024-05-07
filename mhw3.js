@@ -192,7 +192,7 @@ function onTkResponse(response) {
   function onJson(json){
     console.log('JSON ricevuto');
     const library = document.querySelector('#library-view');
-    library.innerHTML = '';
+    library.innerHTML='';
     library.classList.add('hidden');
     let num_results = json.meta.count;
     if(num_results > 5)
@@ -221,8 +221,6 @@ function onTkResponse(response) {
   
     const city_input = document.querySelector('.rc');
     const city_value = encodeURIComponent(city_input.value);
-
-    if(city_value.length==3){
 
     function onTkJson(json) {
       console.log("Token ricevuto: "+ json.access_token);
@@ -254,27 +252,26 @@ function onTkResponse(response) {
         body: "grant_type=client_credentials&client_id=" + client_id + "&client_secret=" + client_secret,
       }
     ).then(onTkResponse).then(onTkJson);
-  }
 }
   
   const form = document.querySelector('form');
   form.addEventListener('input', onInput);
 
-  function onResponse(response){
-    console.log('Risposta ricevuta');
-    return response.json();
-  }
-  
-  function onJson(json){
-    const currency = json.currency.name;
-    const tasto_valuta=document.querySelector('#valuta')
-    tasto_valuta.textContent=currency.toUpperCase();
-  }
-  
-  const apiKey = '7a500ed22186ac7c4bae122da70f7c19f947b96898a90c3c74c9c65c';
-  
-  fetch(`https://api.ipdata.co?api-key=${apiKey}`)
-    .then(onResponse).then(onJson).catch(error => {
-      console.error('Errore durante il recupero delle informazioni sull\'indirizzo IP:', error);
-      }
-    );
+  function onResponse2(response){
+  console.log('Risposta ricevuta');
+  return response.json();
+}
+
+function onJson2(json){
+  const currency = json.currency.name;
+  const tasto_valuta=document.querySelector('#valuta')
+  tasto_valuta.textContent=currency;
+}
+
+const apiKey = '7a500ed22186ac7c4bae122da70f7c19f947b96898a90c3c74c9c65c';
+
+fetch(`https://api.ipdata.co?api-key=${apiKey}`)
+  .then(onResponse2).then(onJson2).catch(error => {
+    console.error('Errore durante il recupero delle informazioni sull\'indirizzo IP:', error);
+    }
+  );
