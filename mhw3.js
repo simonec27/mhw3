@@ -259,3 +259,22 @@ function onTkResponse(response) {
   
   const form = document.querySelector('form');
   form.addEventListener('input', onInput);
+
+  function onResponse(response){
+    console.log('Risposta ricevuta');
+    return response.json();
+  }
+  
+  function onJson(json){
+    const currency = json.currency.name;
+    const tasto_valuta=document.querySelector('#valuta')
+    tasto_valuta.textContent=currency.toUpperCase();
+  }
+  
+  const apiKey = '7a500ed22186ac7c4bae122da70f7c19f947b96898a90c3c74c9c65c';
+  
+  fetch(`https://api.ipdata.co?api-key=${apiKey}`)
+    .then(onResponse).then(onJson).catch(error => {
+      console.error('Errore durante il recupero delle informazioni sull\'indirizzo IP:', error);
+      }
+    );
